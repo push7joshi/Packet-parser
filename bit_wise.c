@@ -54,7 +54,7 @@ int print_bits(char c)
         }
     }
     charBits[8] = '\0';
-    printf("The bit series is: %s\n", charBits);
+    printf("The bit series for %c is: %s\n", c, charBits);
     return 0;
 }
 
@@ -75,22 +75,24 @@ int print_bits_EC(unsigned char* ptr, size_t len)
 
 int split_short(unsigned short byte)
 {
+    printf("\nSplit-Short:");
     unsigned short first=0, second=0;
     unsigned short sbyte = 0x00ff;
     first = byte >> 8;
     second = byte & sbyte;
+    printf("\nThe short: %u", byte);
     printf("\nFirst:%u\nSecond:%u\n", first, second);
     return 0;
 }
 
 int swap_bytes(unsigned short s)
 {
-    printf("Little Endian: %u", s);
+    printf("\nSwap-Bytes:\nLittle Endian: %u", s);
     
     unsigned short first = (s >> 8);
     unsigned short second = (s << 8);
     
-    printf("Big Endian: %u", (first | second));
+    printf("\nBig Endian: %u\n", (first | second));
     
 }
 
@@ -103,13 +105,11 @@ int main()
     //1.2.2 - prints bits for a character.
     c = 'a';
     print_bits(c);
-    printf("\n\n");
     //1.2.3 - print bits for arbitrary data.
     ptr = (char *)malloc(50*sizeof(char));
     ptr = "arbitraryData";
     len = strlen(ptr);
     print_bits_EC(ptr, len);
-    printf("\n\n");
     //1.2.4 - split unsigned short.
     unsigned short byte = 258;
     split_short(byte);

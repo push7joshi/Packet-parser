@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 
 struct record{
 	char first_name[20];
