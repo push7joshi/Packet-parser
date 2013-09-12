@@ -76,12 +76,23 @@ int print_bits_EC(unsigned char* ptr, size_t len)
 int split_short(unsigned short byte)
 {
     unsigned short first=0, second=0;
-    unsigned short fbyte = 0xff00, sbyte = 0x00ff;
-    first = byte & fbyte;
+    unsigned short sbyte = 0x00ff;
+    first = byte >> 8;
     second = byte & sbyte;
     printf("\nFirst:%u\nSecond:%u\n", first, second);
+    return 0;
 }
 
+int swap_bytes(unsigned short s)
+{
+    printf("Little Endian: %u", s);
+    
+    unsigned short first = (s >> 8);
+    unsigned short second = (s << 8);
+    
+    printf("Big Endian: %u", (first | second));
+    
+}
 
 int main()
 {
@@ -100,7 +111,8 @@ int main()
     print_bits_EC(ptr, len);
     printf("\n\n");
     //1.2.4 - split unsigned short.
-    unsigned short byte = 24000;
+    unsigned short byte = 258;
     split_short(byte);
+    swap_bytes(byte);
     printf("\n\n");
 }
