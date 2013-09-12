@@ -1,4 +1,4 @@
-cc		= /usr/bin/gcc
+cc		= gcc
 #flags
 cflags 	= -g
 LIBS 	= -lpcap
