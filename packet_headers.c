@@ -26,13 +26,6 @@
  *
  ***************************************/
 struct ethernet_h{
-<<<<<<< HEAD
-    unsigned char destAddress[6];
-    unsigned char srcAddress[6];
-        // etherType: if value < 1500(max allowed frame size); specifies length - ver802.2
-        // else value > 1536; specifies which protocol is encapsulated in the payload - Ethernet II framing
-    unsigned char etherType[2];
-=======
 //	unsigned char preamble[7];
 //	unsigned char delimiter;
 
@@ -40,8 +33,7 @@ struct ethernet_h{
 	unsigned char srcAddress[6];
     // if value < 1500(max allowed frame size); specifies length - ver802.2
     // else value > 1536; specifies which protocol is encapsulated in the payload - Ethernet II framing
-    unsigned int etherType;
->>>>>>> f202ee30d6aa9e2275478892f4daa1ab0630fd96
+    unsigned char etherType[2];
 };
 
 struct ip_h
