@@ -26,13 +26,13 @@
  *
  ***************************************/
 struct ethernet_h{
-//	unsigned char preamble[7];
-//	unsigned char delimiter;
-
+        //	unsigned char preamble[7];
+        //	unsigned char delimiter;
+    
     unsigned char destAddress[6];
 	unsigned char srcAddress[6];
-    // if value < 1500(max allowed frame size); specifies length - ver802.2
-    // else value > 1536; specifies which protocol is encapsulated in the payload - Ethernet II framing
+        // if value < 1500(max allowed frame size); specifies length - ver802.2
+        // else value > 1536; specifies which protocol is encapsulated in the payload - Ethernet II framing
     unsigned char etherType[2];
 };
 
@@ -84,9 +84,7 @@ int main(int argc, char * argv[])
     }
     
     /* reading one packet at a time and counting packets seen */
-    for (i = 0; i < 5; i++)
-    {
-        (packet = pcap_next(pcap,&header));
+    for (i = 0; (packet = pcap_next(pcap,&header)) != NULL; i++){
         printf("-------- Packet %d ------------\n",i);
         printf("Size: %d bytes\n",header.len);
         
@@ -116,7 +114,7 @@ int main(int argc, char * argv[])
         {
             printf(" %u ", ip->destAddress[j]);
         }
-        printf("\n");        
+        printf("\n");
             //tcp = (struct tcp_h *) (packet + sizeof(struct ethernet_h) + sizeof(struct ip_h));
         
             //TODO: print src and dest port number
