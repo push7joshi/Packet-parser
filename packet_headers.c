@@ -26,27 +26,22 @@
  *
  ***************************************/
 struct ethernet_h{
+<<<<<<< HEAD
     unsigned char destAddress[6];
     unsigned char srcAddress[6];
         // etherType: if value < 1500(max allowed frame size); specifies length - ver802.2
         // else value > 1536; specifies which protocol is encapsulated in the payload - Ethernet II framing
     unsigned char etherType[2];
-};
+=======
+//	unsigned char preamble[7];
+//	unsigned char delimiter;
 
-struct ip_h4
-{
-    /*need these to compute packet lengths*/
-    unsigned char v_ihl; //internet header length
-    unsigned char service; //Type of service - used to define the way routers handle the datagram
-    unsigned short int total_len; //16 bits, max packet size - 2^16 - 65,536
-    
-    unsigned short int identification; //Used along with src address to uniquely id a datagram
-    unsigned short flags; // 00000xxx {Reserved = 0, Don't Fragment, Fragment}
-    unsigned char ttl; //no. of hops
-    unsigned char protocol; //http://bit.ly/c0xBMt list of ip protocols
-    unsigned short checksum;
-    unsigned int destAddress;
-    unsigned int srcAddress;
+    unsigned char destAddress[6];
+	unsigned char srcAddress[6];
+    // if value < 1500(max allowed frame size); specifies length - ver802.2
+    // else value > 1536; specifies which protocol is encapsulated in the payload - Ethernet II framing
+    unsigned int etherType;
+>>>>>>> f202ee30d6aa9e2275478892f4daa1ab0630fd96
 };
 
 struct ip_h
@@ -69,7 +64,6 @@ struct ip_h
 struct tcp_h{
     
 };
-
 
 int main(int argc, char * argv[])
 {
