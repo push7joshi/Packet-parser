@@ -73,8 +73,9 @@ void print_hex_representation(){
 	printf("Printing struct elements\n");
 	print_record_information(&r);
 	printf("The hex representation for the data is\n");
-	for (int i = 0; i<size; i++){
-        printf("\\x%x",*(c+i));
+	int i;
+	for (i = 0; i<size; i++){
+        printf("\\x%02x",*(c+i));
 	}
 	printf("\n");
 };
