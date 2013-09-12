@@ -54,7 +54,15 @@ struct ip_h
 
 
 struct tcp_h{
-    
+	unsigned char src_port[2];
+	unsigned char dest_port[2];
+	unsigned char seq_num[4];
+	unsigned char ack[4];
+	unsigned char offset_res_flag[2];
+	unsigned char window_size[2];
+	unsigned char check_sum[2];
+	unsigned char urgent[2];
+	unsigned char option[4];		//this char just indicates the first 4 bytes of the optional section. We me need to have a    
 };
 
 int main(int argc, char * argv[])
@@ -115,10 +123,21 @@ int main(int argc, char * argv[])
             printf(" %u ", ip->destAddress[j]);
         }
         printf("\n");
-            //tcp = (struct tcp_h *) (packet + sizeof(struct ethernet_h) + sizeof(struct ip_h));
         
-            //TODO: print src and dest port number
-        
+ 	// print src and dest port number
+	tcp = (struct tcp_h *) (packet + sizeof(struct ethernet_h) + sizeof(struct ip_h)); //calulate tcp header and map to struct
+	printf("source port- ");
+	unsigned short src_port = *((unsigned short*)tcp->src_port);	
+	src_port = src_port>>8 | src_port<<8;
+	printf("%u",src_port);
+
+	printf("\n");
+	printf("destination port- ");
+	unsigned short dest_port = *((unsigned short*)tcp->dest_port);
+	dest_port = dest_port>>8 | dest_port<<8;
+	printf("%u",dest_port);
+	printf("\n");
+
         
             //TODO: TLS 1.0
     }
