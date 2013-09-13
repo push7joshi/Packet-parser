@@ -1,0 +1,23 @@
+Part 2 - Packet Parsing:
+This section requires the extraction of source and destination information from the ethernet, ip, tcp. It also needs us to check if TLS 1.0 is used.
+The structs describing headers for ethernet, IP(IP v4) and TCP were populated. New header for TLS was created.
+
+2.1 Ethernet
+The start of the packet is the ethernet and contains the MAC address. The casted into ethernet_h struct. The adresses are then extracted and printed in hex form with necessary formatting. These adresses are 6 bytes each
+
+2.2 IP
+The IP header starts from where the ethernet ends. The segment of the packet right after the ethernet section is casted as struct ip_h. The addresses are then extracted and displayed in appropriate form. These adresses are 4 bytes each
+
+2.3 TCP
+The TCP header starts from where the IP ends. The segment of the packet right after the IP section is casted as struct tcp_h. The addresses are then extracted and displayed in decimal form. These addresses are 2 bytes each.
+
+2.4 TLS
+The TLS header if present may start from where the TCP ends. A check is made the header has data other than TCP, IP, Ethernet. If data aster TCP is cast into struct tls_h. Now if the data corresponding to the version is 0x0301, TLS 1.0 is present and we return true. Else if there is not enough data or data at version attribute is not 0x0301 then TLS 1.0 is not used.
+
+ Running
+For running this program ensure that you have the libpcap library in your path. go the Packet-Parser/part2 folder and execute
+
+	$ make
+	$ ./packet_headers capture1.pcap
+
+capture1.pcap can be replaced with a pcap file of your choice.
