@@ -1,0 +1,28 @@
+Part 1 - C programming primer:
+1.1	This part reviews the basics of C. Program data_sizes.c is used to get the sizes of all built-in as
+	well as user defined data types in C using sizeof() operator.
+	1.1.1 gets sizes for built-in types[int, char, float, long, double].
+	1.1.2 gets size for user defined type - struct.
+	1.1.3 uses type casting to extract data from a char[] presented in hex format.
+	1.1.4 casts data from defined struct to char[] in a hex format.
+1.2 This part works on bitwise operations in C. Though code & many libraries are readily available for bitwise operations in networks,
+	this exercise gives a hands on experience on these operations.
+	1.2.1 Bit-masking: Used to extract information at the bit level. We use bit masking to get TCP flags from a given short.
+	This is done using logical '&' operator.
+	1.2.1 Prints a bit series - (binary equivalent) of given character. We did this by shifting every bit in the char to the last using '>>' operator and
+	'&' it with 1 to get the bit. Finally printed the sequence as a string of characters '0' & '1'
+	1.2.3 Bit series for arbitrary data - used the same function as above. Accepted a complete string for arbitrary data, got every characters bit series from function above.
+	1.2.4 Get the 1st & 2nd part of a short. We did this using bitwise operators, '>>' and '&'. Right shifted the short by 8 bits to get the first byte &
+	used '&' operation to get the second byte of a short.
+	1.2.5 Byte swap for a short. Converting a short from Big Endian to Little Endian. This can be easily done using right shift and '|' operators.
+
+Compilation:
+	Use Makefile to compile the program packet_headers.c. Instead of remembering all the flags everytime to compile, we use Makefile that consists all compilation commands for a program.
+	Compile first program:		make all : 		This compiles both the programs - data_sizes & bit_wise
+								make sizes : 	This cmd compiles data_sizes.c
+								make bit : 		This cmd compiles bit_wise.c
+
+Execution:
+	./data : This cmd executes the program data_sizes.c after compilation using Makefile.
+	./bit : This cmd executes the program bit_wise.c after compilation using Makefile.
+
