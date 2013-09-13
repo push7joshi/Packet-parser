@@ -65,6 +65,13 @@ struct tcp_h{
 	unsigned char option[4];		//this char just indicates the first 4 bytes of the optional section. We me need to have a    
 };
 
+struct tls_h{
+	unsigned char type;
+	unsigned char version[2];
+	unsigned char length[2];
+};
+
+
 int main(int argc, char * argv[])
 {
     /*Stuff needed to parse file*/
@@ -78,6 +85,7 @@ int main(int argc, char * argv[])
     struct ethernet_h * ethernet, eth1;
     struct ip_h * ip;
     struct tcp_h * tcp;
+	struct tls_h * tls;
     
     if (argc != 2) {
         printf("Please specify input file!");
@@ -139,6 +147,24 @@ int main(int argc, char * argv[])
 	printf("\n");
 
         
-            //TODO: TLS 1.0
+	//calulate tls header and map to struct. This calculation  checks for the first tls message if any. It checks only for TLSv1 (using 0x0301)
+	int size = header.len;
+	if( size >= sizeof(struct ethernet_h) + sizeof(struct ip_h) + sizeof(struct tcp_h)+ sizeof(struct tls_h)){ 	//check if header has enough bytes for tls
+		tls = (struct tls_h *) (packet + sizeof(struct ethernet_h) + sizeof(struct ip_h) + sizeof(struct tcp_h)); 
+		unsigned char version_upper = *((unsigned char*)tls->version);
+		unsigned char version_lower = *((unsigned char*)tls->version+1);
+		if (version_upper == 0x03 && version_lower == 0x01){
+			printf("TLS 1.0: Yes\n");
+		}
+		else{
+			printf("TLS 1.0: No\n");
+		}
+		version_upper = 0;	//clearing values
+		version_lower = 0;	//clearing values	
+	}
+	else{
+		printf("TLS 1.0: No\n");
+	}
+	printf("\n");
     }
 }
