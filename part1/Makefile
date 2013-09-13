@@ -10,5 +10,5 @@ bit:
 	$(cc) $(cflags) bit_wise.c -o bit
 
 clean:
-	rm -rf *.o headers 
+	rm -rf *.o data bit 
 

@@ -99,12 +99,14 @@ int swap_bytes(unsigned short s)
 int main()
 {
     int i = 1;
-    int flags;
+    int flags = 0x1A1;
     size_t len;
     unsigned char c, *ptr;
+	tcp_flags(flags);
     //1.2.2 - prints bits for a character.
     c = 'a';
     print_bits(c);
+	printf("\n");
     //1.2.3 - print bits for arbitrary data.
     ptr = (char *)malloc(50*sizeof(char));
     ptr = "arbitraryData";
